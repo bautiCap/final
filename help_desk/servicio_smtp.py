@@ -1,4 +1,6 @@
-"""sgyi dqbx hpwh bzzo bellapazprol@gmail.com"""
+# """Envío de correos electrónicos para notificar tickets al administrador.
+
+# Este módulo configura y envía correos usando el protocolo SMTP.
 
 import smtplib
 from email.mime.text import MIMEText
@@ -6,12 +8,20 @@ from email.mime.text import MIMEText
 # Configuración de correo
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SMTP_USER = "bellapazprol@gmail.com"  # Cambia por tu correo
-SMTP_PASS = "sgyi dqbx hpwh bzzo"  # Cambia por tu contraseña de aplicación
-ADMIN_EMAIL = "bellapazprol@gmail.com"  # Cambia por el correo del administrador
+SMTP_USER = ""  # Cambia por un correo de Gmail, para que envie los tickets
+SMTP_PASS = ""  # Cambia por la contraseña de aplicación TP_USER. ej: "sgyi dqbx hpwh bzzo". para saber como activar esta contraseña ir a README.md
+ADMIN_EMAIL = ""  # Cambia por el correo del administrador que recibira el mail(puede ser el mismo que TP_USER)
 
-def send_email(ticket):
-    """Envía un correo al administrador con los detalles del ticket."""
+
+def send_email(ticket: dict) -> bool | str:
+    """Envía un correo al administrador con los detalles del ticket.
+
+    Args:
+        ticket: Diccionario con los datos del ticket (id, user, email, title, description, date).
+
+    Returns:
+        True si el correo se envía correctamente, o un mensaje de error si falla.
+    """
     msg = MIMEText(
         f"Nuevo ticket #{ticket['id'][:8]}:\n"
         f"Usuario: {ticket['user']}\n"
